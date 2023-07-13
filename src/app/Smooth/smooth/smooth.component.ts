@@ -2,6 +2,7 @@ import { Component,  ElementRef, OnInit, ViewChild} from '@angular/core';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { animate } from '@angular/animations';
 
 @Component({
   selector: 'app-smooth',
@@ -23,6 +24,7 @@ export class SmoothComponent {
   ngOnInit() {
     this.initScene();
     this.loadModel();
+    this.animate();
   }
   private initScene() {
     /*const width = window.innerWidth;
@@ -90,11 +92,14 @@ export class SmoothComponent {
         object.position.set(0,0,0);
 
         // render the scene
-      this.renderer.render(this.scene,this.camera);
+        this.animate();
 
-            }, undefined, function(error){
-                console.error(error);
-            });
+           
+      });
     }
-
+         private animate()
+         {
+          this.renderer.render(this.scene,this.camera)
+          requestAnimationFrame(animate);
+         }
 }

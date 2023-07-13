@@ -2,6 +2,7 @@ import { Component,  ElementRef, OnInit, ViewChild} from '@angular/core';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { animate } from '@angular/animations';
 
 @Component({
   selector: 'app-teacup',
@@ -23,6 +24,7 @@ export class TeacupComponent implements OnInit {
   ngOnInit() {
     this.initScene();
     this.loadModel();
+    this.animate();
   }
   private initScene() {
     /*const width = window.innerWidth;
@@ -54,7 +56,7 @@ export class TeacupComponent implements OnInit {
     controls.addEventListener('change',()=>{
       this.renderer.render(this.scene,this.camera)
     });
-    controls.autoRotate=true;
+     
     controls.enableZoom=true;
     controls.enablePan=true;
     controls.target.set(0,0,0);
@@ -94,10 +96,15 @@ export class TeacupComponent implements OnInit {
         object.position.set(0,0,0);
 
         // render the scene
-      this.renderer.render(this.scene,this.camera);
+      this.animate();
 
-            }, undefined, function(error){
-                console.error(error);
-            });
-    }
+           
+    });
   }
+       private animate()
+       {
+        this.renderer.render(this.scene,this.camera)
+        requestAnimationFrame(animate);
+       }
+  
+}

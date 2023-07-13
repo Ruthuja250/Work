@@ -2,6 +2,7 @@ import { Component,  ElementRef, OnInit, ViewChild} from '@angular/core';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { animate } from '@angular/animations';
 
 @Component({
   selector: 'app-upper-lid',
@@ -23,6 +24,7 @@ export class UpperLidComponent implements OnInit {
   ngOnInit() {
     this.initScene();
     this.loadModel();
+    this.animate();
     
   }
   private initScene() {
@@ -91,11 +93,14 @@ export class UpperLidComponent implements OnInit {
         object.position.set(0,0,0);
 
         // render the scene
-      this.renderer.render(this.scene,this.camera);
+        this.animate();
 
-            }, undefined, function(error){
-                console.error(error);
-            });
+           
+      });
     }
-
+         private animate()
+         {
+          this.renderer.render(this.scene,this.camera)
+          requestAnimationFrame(animate);
+         }
 }

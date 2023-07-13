@@ -2,13 +2,14 @@ import { Component,  ElementRef, OnInit, ViewChild} from '@angular/core';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { animate, animation } from '@angular/animations';
 
 @Component({
   selector: 'app-bootom-lid',
   templateUrl: './bootom-lid.component.html',
   styleUrls: ['./bootom-lid.component.css']
 })
-export class BootomLidComponent {
+export class BootomLidComponent implements OnInit {
   private scene: THREE.Scene;
   private camera: THREE.PerspectiveCamera;
   private renderer: THREE.WebGLRenderer;
@@ -23,6 +24,7 @@ export class BootomLidComponent {
   ngOnInit() {
     this.initScene();
     this.loadModel();
+    this.animate();
   }
   private initScene() {
     /*const width = window.innerWidth;
@@ -55,6 +57,7 @@ export class BootomLidComponent {
     controls.enablePan=true;
     controls.target.set(0,0,0);
     controls.update();
+    
 
     // nice ambient light
     const ambientLight = new THREE.AmbientLight(0x404040,10 );
@@ -90,11 +93,15 @@ export class BootomLidComponent {
         object.position.set(0,0,0);
 
         // render the scene
-      this.renderer.render(this.scene,this.camera);
+        this.animate();
 
-            }, undefined, function(error){
-                console.error(error);
-            });
+           
+      });
     }
+         private animate()
+         {
+          this.renderer.render(this.scene,this.camera)
+          requestAnimationFrame(animate);
+         }
 
 }
